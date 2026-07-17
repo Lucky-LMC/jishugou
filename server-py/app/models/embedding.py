@@ -7,7 +7,8 @@ Embedding 模型封装
 import os
 from langchain_openai import OpenAIEmbeddings
 
-# 方式一：智谱 AI（默认）
+# Embedding 模型把文本转换为数值向量；入库和查询必须使用语义空间兼容的模型。
+# 当前启用方式一：智谱 AI。
 embeddings = OpenAIEmbeddings(
     model="embedding-3",
     api_key=os.getenv("ZHIPU_API_KEY"),
@@ -15,7 +16,7 @@ embeddings = OpenAIEmbeddings(
     check_embedding_ctx_length=False,
 )
 
-# 方式二：阿里云百炼（注释掉方式一，取消注释此段）
+# 方式二：阿里云百炼的 OpenAI 兼容接口示例（当前未启用）。
 # embeddings = OpenAIEmbeddings(
 #     model="text-embedding-v3",
 #     api_key=os.getenv("DASHSCOPE_API_KEY"),

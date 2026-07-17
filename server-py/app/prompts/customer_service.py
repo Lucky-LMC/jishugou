@@ -4,10 +4,9 @@ Prompt 模板
 """
 from langchain_core.prompts import ChatPromptTemplate
 
-# 极速购客服 Prompt
-# - system: 定义角色、规则、边界
-# - placeholder: 插入对话历史（实现记忆的关键）
-# - human: 当前用户输入
+# 极速购客服 Prompt 由三部分组成：
+# system 定义固定角色、规则和边界；placeholder 插入本次请求携带的历史消息；
+# human 放入当前问题。这里的“记忆”来自前端回传 history，不是后端持久化记忆。
 customer_service_prompt = ChatPromptTemplate.from_messages(
     [
         (
@@ -28,7 +27,7 @@ customer_service_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-# 通用对话 Prompt（无业务约束，用于演示）
+# 通用对话 Prompt 没有电商业务约束，用于演示同一模型搭配不同 Prompt 的效果。
 general_chat_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", "你是一个有帮助的 AI 助手，用中文回答问题。"),
