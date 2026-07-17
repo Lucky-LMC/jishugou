@@ -17,7 +17,7 @@ class GraphState(TypedDict):
     intent: str
 
     # 三条分支各自写入不同字段，避免节点之间互相覆盖数据。
-    # Optional 表示订单分支尚未执行时，这个字段可以没有值或为 None。
+    # Optional 表示这个字段的值允许为 None；在订单分支尚未执行时，运行时状态也可能还没有写入它。
     order_result: Optional[dict]
     # 知识库分支生成的回答文本。
     rag_result: str
