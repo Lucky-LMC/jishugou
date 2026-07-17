@@ -75,7 +75,8 @@ async def chat_stream(req: ChatRequest):
 
     async def event_generator():
         try:
-            # astream 每得到一段模型输出就进入一次循环，因此前端能逐字看到回答。
+            # astream 每得到一段模型输出就进入一次循环；chunk 粒度由模型提供方决定，
+            # 前端可以据此增量渲染回答，但不保证严格按单个字符返回。
             async for chunk in customer_service_stream_chain.astream(
                 {
                     "user_input": req.message,

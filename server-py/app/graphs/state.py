@@ -7,7 +7,7 @@ from typing_extensions import TypedDict
 
 class GraphState(TypedDict):
     # messages 保存对话消息。Annotated 中的 add_messages 是 LangGraph 的“状态合并器”：
-    # 节点返回新消息时，LangGraph 会把新消息追加到原列表，而不是直接覆盖整个列表。
+    # 不同 id 的新消息通常会追加到原列表，同 id 的消息则会更新原消息，而不是直接覆盖整个列表。
     messages: Annotated[list, add_messages]
 
     # 本轮用户原始输入。各个业务节点都从这里读取当前问题。

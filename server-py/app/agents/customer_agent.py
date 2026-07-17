@@ -10,7 +10,7 @@ _model = create_model(temperature=0)
 
 
 def _system_prompt():
-    # 每次创建 Agent 时读取当前时间，使模型能够理解“今天”“现在”等相对时间表达。
+    # 创建 Agent 时读取当前时间；应用通常会复用已创建的 Agent，因此提示中的时间也是创建时的时间。
     now = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     return f"""你是极速购电商平台的智能客服助手小购。
 

@@ -1,7 +1,8 @@
 """PostgreSQL 连接配置"""
 import os
 
-# 每项配置优先读取 .env；没有配置时使用本地开发默认值。
+# 这里只读取进程环境变量；通过 main.py 的 load_dotenv() 提前加载 .env 后即可使用文件配置，
+# 直接运行入库脚本时也需要先保证这些环境变量已经加载，否则使用本地开发默认值。
 PG_HOST = os.getenv("PG_HOST", "localhost")
 PG_PORT = os.getenv("PG_PORT", "5432")
 PG_USER = os.getenv("PG_USER", "postgres")

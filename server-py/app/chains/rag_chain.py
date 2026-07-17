@@ -20,7 +20,7 @@ vector_store = PGVector(
 # retriever 把向量库封装为 LangChain 检索器；每次取与问题最相似的 4 个文档块。
 retriever = vector_store.as_retriever(search_kwargs={"k": 4})
 
-# Prompt 明确要求模型只能依据检索上下文作答，缺少依据时不能编造。
+# Prompt 要求模型尽量依据检索上下文作答，缺少依据时明确说明未查到，降低编造风险。
 rag_prompt = ChatPromptTemplate.from_messages(
     [
         (
@@ -79,7 +79,7 @@ def _with_sources(input):
     docs = retriever.invoke(input["question"])
     answer = _answer_chain.invoke({"docs": docs, "question": input["question"]})
 
-    # 来源仅返回正文前 100 个字符和入库时写入 metadata 的 source 字段。
+    # 来源返回正文前 100 个字符并加省略号，同时返回入库时写入 metadata 的 source 字段。
     sources = [
         {"content": doc.page_content[:100] + "...", "source": doc.metadata.get("source")}
         for doc in docs
